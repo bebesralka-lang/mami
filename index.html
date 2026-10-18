@@ -1,1 +1,950 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Самой лучшей МАМЕ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== СБРОС ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #faf6ed;
+            color: #4a3728;
+            overflow-x: hidden;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px;
+            background: rgba(250, 246, 237, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .navbar .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #8c7152;
+            letter-spacing: 2px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .navbar .nav-links a {
+            color: #8c7152;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            opacity: 0.6;
+        }
+
+        .navbar .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            background: linear-gradient(180deg, #faf6ed 0%, #f7eabe 100%);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            color: #8c7152;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .hero h1 span {
+            font-style: italic;
+            color: #c9a96e;
+        }
+
+        .hero .sub {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: #8c7152;
+            letter-spacing: 6px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .hero .bouquet {
+            font-size: clamp(4rem, 10vw, 8rem);
+            margin-bottom: 30px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
+        }
+
+        .hero .btn-ribbon {
+            display: inline-block;
+            padding: 14px 48px;
+            background: #f7eabe;
+            color: #8c7152;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            border-radius: 40px;
+            text-decoration: none;
+            border: 1px solid rgba(140, 113, 82, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            transition: 0.4s;
+            text-transform: uppercase;
+        }
+
+        .hero .btn-ribbon:hover {
+            background: #c9a96e;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(201, 169, 110, 0.2);
+        }
+
+        /* ===== ВОЛНИСТЫЙ РАЗДЕЛИТЕЛЬ ===== */
+        .wave-divider {
+            width: 100%;
+            height: 80px;
+            background: #f7eabe;
+            clip-path: ellipse(70% 100% at 50% 0%);
+            margin-top: -1px;
+        }
+
+        /* ===== СЕКЦИИ ===== */
+        .section {
+            padding: 80px 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #8c7152;
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #8c7152;
+            opacity: 0.5;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* ===== ГАЛЕРЕЯ ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            justify-items: center;
+        }
+
+        .polaroid {
+            background: #fff;
+            padding: 10px 10px 20px 10px;
+            border-radius: 4px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transition: 0.4s;
+            text-align: center;
+            max-width: 200px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .polaroid:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .polaroid img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+            background: #f0ece6;
+        }
+
+        .polaroid .caption {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem;
+            color: #8c7152;
+            margin-top: 8px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        .polaroid .heart {
+            font-size: 0.8rem;
+            color: #e182c3;
+            margin-top: 2px;
+            display: block;
+        }
+
+        /* ===== СТИХИ ===== */
+        .poem {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #6a5445;
+            font-style: italic;
+            padding: 40px 20px;
+            background: rgba(247, 234, 190, 0.2);
+            border-radius: 24px;
+        }
+
+        .poem .line {
+            display: block;
+        }
+
+        /* ===== ВИДЕО ===== */
+        .video-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            background: #f0ece6;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8c7152;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* ===== СЕКРЕТНОЕ ПОСЛАНИЕ ===== */
+        .secret-box {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f7eabe;
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .secret-box:hover {
+            transform: scale(1.01);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.06);
+        }
+
+        .secret-box .lock {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .secret-box .secret-text {
+            display: none;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #6a5445;
+            font-style: italic;
+        }
+
+        .secret-box .secret-text.show {
+            display: block;
+        }
+
+        .secret-box .hint {
+            font-size: 0.8rem;
+            color: #8c7152;
+            opacity: 0.5;
+            margin-top: 8px;
+        }
+
+        /* ===== МУЗЫКА ===== */
+        .music-player {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f7eabe;
+            border-radius: 40px;
+            padding: 20px 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .music-player:hover {
+            background: #f0e0b0;
+        }
+
+        .music-player .play-icon {
+            font-size: 2rem;
+            color: #8c7152;
+        }
+
+        .music-player .music-text {
+            font-family: 'Playfair Display', serif;
+            color: #8c7152;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* ===== ПОСЛАНИЕ ===== */
+        .message-box {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .message-box textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(140, 113, 82, 0.15);
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #4a3728;
+            resize: vertical;
+            min-height: 120px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .message-box textarea:focus {
+            border-color: #c9a96e;
+            box-shadow: 0 0 20px rgba(201, 169, 110, 0.1);
+        }
+
+        .message-box .btn-send {
+            margin-top: 16px;
+            padding: 12px 40px;
+            background: #c9a96e;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .message-box .btn-send:hover {
+            background: #b8954a;
+            transform: translateY(-2px);
+        }
+
+        /* ===== ПЛАВАЮЩИЕ СЕРДЕЧКИ ===== */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            overflow: hidden;
+        }
+
+        .heart-particle {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp linear forwards;
+            opacity: 0.6;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* ===== СТЕНА БЛАГОДАРНОСТИ ===== */
+        .gratitude-wall {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .gratitude-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+            font-size: 0.9rem;
+            color: #6a5445;
+            font-style: italic;
+            max-width: 280px;
+            text-align: center;
+            border: 1px solid rgba(140, 113, 82, 0.05);
+            transition: 0.3s;
+            cursor: default;
+            line-height: 1.5;
+        }
+
+        .gratitude-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border-color: #c9a96e;
+        }
+
+        .gratitude-card .heart {
+            color: #e182c3;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* ===== СЕМЕЙНОЕ ДРЕВО ===== */
+        .tree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(247, 234, 190, 0.15);
+            border-radius: 24px;
+        }
+
+        .tree-level {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tree-node {
+            text-align: center;
+            padding: 10px 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(140, 113, 82, 0.05);
+            font-size: 0.8rem;
+            color: #4a3728;
+            min-width: 80px;
+            transition: 0.3s;
+        }
+
+        .tree-node:hover {
+            border-color: #c9a96e;
+            transform: scale(1.02);
+        }
+
+        .tree-node .avatar {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .tree-node .name {
+            font-weight: 500;
+            color: #6a5445;
+        }
+
+        .tree-node .role {
+            font-size: 0.6rem;
+            color: #8c7152;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        .tree-line {
+            width: 2px;
+            height: 20px;
+            background: #d4be9b;
+            margin: 0 auto;
+        }
+
+        .tree-horizontal {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== ГОЛОСОВОЕ ПОЗДРАВЛЕНИЕ ===== */
+        .voice-box {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f7eabe;
+            border-radius: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .voice-box .mic-icon {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .voice-box .voice-text {
+            font-size: 0.9rem;
+            color: #8c7152;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+
+        .voice-box .btn-play {
+            padding: 12px 36px;
+            background: #c9a96e;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .voice-box .btn-play:hover {
+            background: #b8954a;
+            transform: translateY(-2px);
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f7eabe;
+            border-top: 1px solid rgba(140, 113, 82, 0.05);
+        }
+
+        .footer .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #8c7152;
+            letter-spacing: 4px;
+        }
+
+        .footer .brand .heart {
+            color: #e182c3;
+        }
+
+        .footer p {
+            font-size: 0.7rem;
+            color: #8c7152;
+            opacity: 0.3;
+            margin-top: 8px;
+        }
+
+        /* ===== АДАПТАЦИЯ ===== */
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 12px 20px;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .navbar .nav-links {
+                gap: 14px;
+            }
+            .navbar .nav-links a {
+                font-size: 0.65rem;
+            }
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 16px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero .sub {
+                font-size: 1.6rem;
+                letter-spacing: 4px;
+            }
+            .section {
+                padding: 50px 16px;
+            }
+            .tree-level {
+                gap: 16px;
+            }
+            .tree-node {
+                min-width: 60px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ПЛАВАЮЩИЕ СЕРДЕЧКИ ===== -->
+    <div class="floating-hearts" id="heartsContainer"></div>
+
+    <!-- ===== НАВИГАЦИЯ ===== -->
+    <nav class="navbar">
+        <div class="logo">МАМЕ</div>
+        <ul class="nav-links">
+            <li><a href="#gallery">Галерея</a></li>
+            <li><a href="#poem">Стихи</a></li>
+            <li><a href="#gratitude">Благодарность</a></li>
+            <li><a href="#tree">Древо</a></li>
+            <li><a href="#voice">Голос</a></li>
+            <li><a href="#message">Послание</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <section class="hero">
+        <h1>Самой лучшей <span>МАМЕ</span></h1>
+        <div class="bouquet">🌷</div>
+        <a href="#message" class="btn-ribbon">Оставить послание</a>
+    </section>
+
+    <!-- ===== ВОЛНИСТЫЙ РАЗДЕЛИТЕЛЬ ===== -->
+    <div class="wave-divider"></div>
+
+    <!-- ===== ГАЛЕРЕЯ ===== -->
+    <section class="section" id="gallery">
+        <h2 class="section-title">Галерея воспоминаний</h2>
+        <p class="section-sub">моменты, которые мы храним</p>
+
+        <div class="gallery">
+            <div class="polaroid">
+                <img src="photo1.jpg" alt="Воспоминание 1" />
+                <div class="caption">2015 — наш первый отпуск</div>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="polaroid">
+                <img src="photo2.jpg" alt="Воспоминание 2" />
+                <div class="caption">2010 — мама с папой</div>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="polaroid">
+                <img src="photo3.jpg" alt="Воспоминание 3" />
+                <div class="caption">2005 — мама в детстве</div>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="polaroid">
+                <img src="photo4.jpg" alt="Воспоминание 4" />
+                <div class="caption">2018 — семейный праздник</div>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="polaroid">
+                <img src="photo5.jpg" alt="Воспоминание 5" />
+                <div class="caption">2020 — наш дом</div>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="polaroid">
+                <img src="photo6.jpg" alt="Воспоминание 6" />
+                <div class="caption">2012 — лето у бабушки</div>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="polaroid">
+                <img src="photo7.jpg" alt="Воспоминание 7" />
+                <div class="caption">2019 — Новый год</div>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="polaroid">
+                <img src="photo8.jpg" alt="Воспоминание 8" />
+                <div class="caption">2022 — просто вместе</div>
+                <span class="heart">❤️</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== СТИХИ ===== -->
+    <section class="section" id="poem">
+        <h2 class="section-title">Стихи для мамы</h2>
+        <div class="poem">
+            <span class="line">Ты — мой самый тёплый свет,</span>
+            <span class="line">Мой уют, моя опора.</span>
+            <span class="line">В этом мире лучше нет</span>
+            <span class="line">Человека, с кем не спорим.</span>
+            <br />
+            <span class="line">Ты прощаешь все ошибки,</span>
+            <span class="line">Даришь ласку и тепло.</span>
+            <span class="line">Твои руки, твои губы —</span>
+            <span class="line">Как спасение, легко.</span>
+            <br />
+            <span class="line">Я тебя люблю, родная,</span>
+            <span class="line">Больше жизни, больше слов.</span>
+            <span class="line">Ты — моя любовь земная,</span>
+            <span class="line">Мама, ты — моя любовь!</span>
+        </div>
+    </section>
+
+    <!-- ===== СТЕНА БЛАГОДАРНОСТИ ===== -->
+    <section class="section" id="gratitude">
+        <h2 class="section-title">Стена благодарности</h2>
+        <p class="section-sub">за что я тебя люблю</p>
+        <div class="gratitude-wall">
+            <div class="gratitude-card">
+                За твой борщ, который лучше любого ресторана
+                <span class="heart">❤️</span>
+            </div>
+            <div class="gratitude-card">
+                За то, что всегда поддерживаешь меня, даже когда я ошибаюсь
+                <span class="heart">❤️</span>
+            </div>
+            <div class="gratitude-card">
+                За твои тёплые объятия, которые лечат всё
+                <span class="heart">❤️</span>
+            </div>
+            <div class="gratitude-card">
+                За то, что ты научила меня быть сильной
+                <span class="heart">❤️</span>
+            </div>
+            <div class="gratitude-card">
+                За твой смех, который делает дом уютнее
+                <span class="heart">❤️</span>
+            </div>
+            <div class="gratitude-card">
+                За то, что ты всегда рядом — в радости и в трудные минуты
+                <span class="heart">❤️</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== СЕМЕЙНОЕ ДРЕВО ===== -->
+    <section class="section" id="tree">
+        <h2 class="section-title">Семейное древо</h2>
+        <p class="section-sub">наша история</p>
+
+        <div class="tree-container">
+            <!-- Верхний уровень — бабушка и дедушка -->
+            <div class="tree-level">
+                <div class="tree-node">
+                    <span class="avatar">👵</span>
+                    <span class="name">Бабушка</span>
+                    <span class="role">хранительница тепла</span>
+                </div>
+                <div class="tree-node">
+                    <span class="avatar">👴</span>
+                    <span class="name">Дедушка</span>
+                    <span class="role">глава семьи</span>
+                </div>
+            </div>
+
+            <div class="tree-line"></div>
+
+            <!-- Средний уровень — мама и папа -->
+            <div class="tree-level">
+                <div class="tree-node" style="border-color: #c9a96e;">
+                    <span class="avatar">👩</span>
+                    <span class="name">Мама</span>
+                    <span class="role">самая лучшая</span>
+                </div>
+                <div class="tree-node">
+                    <span class="avatar">👨</span>
+                    <span class="name">Папа</span>
+                    <span class="role">опора семьи</span>
+                </div>
+            </div>
+
+            <div class="tree-line"></div>
+
+            <!-- Нижний уровень — дети -->
+            <div class="tree-level">
+                <div class="tree-node">
+                    <span class="avatar">👧</span>
+                    <span class="name">Дочь</span>
+                    <span class="role">твоя любовь</span>
+                </div>
+                <div class="tree-node">
+                    <span class="avatar">👦</span>
+                    <span class="name">Сын</span>
+                    <span class="role">твоя гордость</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ГОЛОСОВОЕ ПОЗДРАВЛЕНИЕ ===== -->
+    <section class="section" id="voice">
+        <h2 class="section-title">Голосовое поздравление</h2>
+        <p class="section-sub">послушай мой голос</p>
+        <div class="voice-box">
+            <span class="mic-icon">🎤</span>
+            <p class="voice-text">Нажми на кнопку, чтобы услышать поздравление</p>
+            <button class="btn-play" id="voiceBtn">▶ Воспроизвести</button>
+        </div>
+    </section>
+
+    <!-- ===== ВИДЕО ===== -->
+    <section class="section" id="video">
+        <h2 class="section-title">Видео-поздравление</h2>
+        <p class="section-sub">с любовью от меня</p>
+        <div class="video-container">
+            <span>🎬 Здесь будет видео (добавь video.mp4)</span>
+        </div>
+    </section>
+
+    <!-- ===== СЕКРЕТНОЕ ПОСЛАНИЕ ===== -->
+    <section class="section">
+        <h2 class="section-title">Секретное послание</h2>
+        <div class="secret-box" id="secretBox">
+            <span class="lock">🔒</span>
+            <p class="hint">Нажми, чтобы открыть</p>
+            <div class="secret-text" id="secretText">
+                <p>Мама, ты — моё всё. Спасибо, что ты есть. Я тебя очень люблю. ❤️</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== МУЗЫКА ===== -->
+    <section class="section">
+        <h2 class="section-title">Наша песня</h2>
+        <div class="music-player" id="musicBtn">
+            <span class="play-icon" id="playIcon">▶</span>
+            <span class="music-text">Включить музыку</span>
+        </div>
+    </section>
+
+    <!-- ===== ПОСЛАНИЕ ===== -->
+    <section class="section" id="message">
+        <h2 class="section-title">Оставить послание</h2>
+        <div class="message-box">
+            <textarea placeholder="Напиши что-то доброе для мамы..."></textarea>
+            <button class="btn-send">Отправить</button>
+        </div>
+    </section>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer class="footer">
+        <div class="brand">МАМЕ <span class="heart">❤</span></div>
+        <p>Сделано с любовью</p>
+    </footer>
+
+    <!-- ===== СКРИПТЫ ===== -->
+    <script>
+        // ===== СЕКРЕТНОЕ ПОСЛАНИЕ =====
+        const secretBox = document.getElementById('secretBox');
+        const secretText = document.getElementById('secretText');
+
+        secretBox.addEventListener('click', function() {
+            secretText.classList.toggle('show');
+            this.querySelector('.lock').textContent = secretText.classList.contains('show') ? '🔓' : '🔒';
+        });
+
+        // ===== МУЗЫКА =====
+        const musicBtn = document.getElementById('musicBtn');
+        const playIcon = document.getElementById('playIcon');
+        let audio = null;
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', function() {
+            if (!audio) {
+                audio = new Audio('music.mp3');
+                audio.loop = true;
+                audio.volume = 0.4;
+            }
+
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                playIcon.textContent = '▶';
+            } else {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playIcon.textContent = '⏸';
+                }).catch(() => {
+                    alert('Добавь music.mp3 в папку с сайтом!');
+                });
+            }
+        });
+
+        // ===== ГОЛОСОВОЕ ПОЗДРАВЛЕНИЕ =====
+        const voiceBtn = document.getElementById('voiceBtn');
+        let voiceAudio = null;
+        let voicePlaying = false;
+
+        voiceBtn.addEventListener('click', function() {
+            if (!voiceAudio) {
+                voiceAudio = new Audio('voice.mp3');
+                voiceAudio.volume = 0.6;
+            }
+
+            if (voicePlaying) {
+                voiceAudio.pause();
+                voicePlaying = false;
+                voiceBtn.textContent = '▶ Воспроизвести';
+            } else {
+                voiceAudio.play().then(() => {
+                    voicePlaying = true;
+                    voiceBtn.textContent = '⏸ Пауза';
+                }).catch(() => {
+                    alert('Добавь voice.mp3 в папку с сайтом!');
+                });
+            }
+        });
+
+        // ===== ПЛАВАЮЩИЕ СЕРДЕЧКИ =====
+        const heartsContainer = document.getElementById('heartsContainer');
+        const emojis = ['❤️', '💕', '🌸', '🌺', '✨', '💗'];
+
+        function createHeart() {
+            const el = document.createElement('div');
+            el.className = 'heart-particle';
+            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            el.style.left = Math.random() * 100 + '%';
+            el.style.fontSize = (Math.random() * 20 + 14) + 'px';
+            el.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            el.style.animationDelay = '0s';
+            el.style.opacity = Math.random() * 0.4 + 0.2;
+            heartsContainer.appendChild(el);
+            setTimeout(() => el.remove(), 16000);
+        }
+
+        setInterval(createHeart, 1500);
+        for (let i = 0; i < 6; i++) {
+            setTimeout(createHeart, i * 500);
+        }
+
+        console.log('❤️ Сайт для мамы готов!');
+    </script>
+
+</body>
+</html>
